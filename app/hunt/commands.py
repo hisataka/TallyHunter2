@@ -19,4 +19,4 @@ def register(bot):
             view=view,
         )
         message = await interaction.original_response()
-        asyncio.create_task(view.schedule_auto_end(message, end_t)
+        asyncio.create_task(view.schedule_auto_end(message, end_t))
