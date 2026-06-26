@@ -149,6 +149,13 @@ class HuntView(discord.ui.View):
             fresh = await message.channel.fetch_message(message.id)
             if "\U0001F3C6" in fresh.embeds[0].title:  # 🏆 が残っているなら未終了
                 await self.end_hunt_logic(fresh)
+                try:
+                    data = get_data_field(fresh).split('|')
+                    host_id = int(data[2])
+                    await message.channel.send(f"<@{host_id}> ⏰ 狩猟大会終了！")
+                except discord.HTTPException:
+                    pass
+
         except (discord.NotFound, discord.Forbidden, IndexError):
             return
 
