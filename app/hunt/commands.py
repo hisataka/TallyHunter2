@@ -1,3 +1,5 @@
+import asyncio
+
 import time
 
 import discord
@@ -7,8 +9,6 @@ from .views import HuntView
 
 
 def register(bot):
-    """狩猟大会関連のスラッシュコマンドを bot に登録する。"""
-
     @bot.tree.command(name="start-hunt", description="狩猟大会を開始")
     async def start(interaction: discord.Interaction, team_name: str, minutes: int = 15, is_host_mode: bool = False):
         end_t = int(time.time()) + (minutes * 60)
@@ -18,3 +18,5 @@ def register(bot):
             embed=view.get_embed(team_name, 0, counts, end_t, interaction.user.id, is_host_mode),
             view=view,
         )
+        message = await interaction.original_response()
+        asyncio.create_task(view.schedule_auto_end(message, end_t)

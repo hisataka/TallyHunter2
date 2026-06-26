@@ -1,3 +1,5 @@
+import asyncio
+
 import time
 
 import discord
@@ -136,6 +138,19 @@ class HuntView(discord.ui.View):
             ),
             view=ResultView(message, int(data[1]), int(data[2]), bool(int(data[3]))),
         )
+
+    async def schedule_auto_end(self, message, end_time):
+        """end_time を過ぎたら自動で結果画面へ遷移するタスクを予約する。"""
+        delay = end_time - time.time()
+        if delay > 0:
+            await asyncio.sleep(delay)
+        # 既に終了済み（タイトルが🏁）ならスキップ
+        try:
+            fresh = await message.channel.fetch_message(message.id)
+            if "\U0001F3C6" in fresh.embeds[0].title:  # 🏆 が残っているなら未終了
+                await self.end_hunt_logic(fresh)
+        except (discord.NotFound, discord.Forbidden, IndexError):
+            return
 
     @discord.ui.button(label="SS", style=discord.ButtonStyle.danger, custom_id="h1")
     async def b1(self, i, b):
