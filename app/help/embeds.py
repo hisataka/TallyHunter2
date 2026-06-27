@@ -3,7 +3,7 @@ import discord
 
 def build_help_embed():
     embed = discord.Embed(
-        title="📖 TallyHunter2 Help",
+        title="📖 TallyHunter Help",
         description="利用可能なコマンド一覧",
     )
 
