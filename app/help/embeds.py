@@ -14,7 +14,7 @@ def build_help_embed():
             "引数:\n"
             "• team_name (必須): チーム名\n"
             "• minutes (任意): 制限時間（分、default=15）\n"
-            "• is_host_mode (任意): 主催者モード\n\n"
+            "• is_host_mode (任意): 主催者モード（ボタンを主催者のみが押下可能です。）\n\n"
             "例:\n"
             "`/start-hunt team_name:炎PT minutes:20`"
         ),
@@ -28,7 +28,7 @@ def build_help_embed():
             "引数:\n"
             "• team_name (必須): チーム名\n"
             "• time_limit (任意): 制限秒（default=180）\n"
-            "• is_host_mode (任意): 主催者モード\n\n"
+            "• is_host_mode (任意): 主催者モード（ボタンを主催者のみが押下可能です。）\n\n"
             "例:\n"
             "`/extreme-trial team_name:星4縛り time_limit:180`"
         ),
