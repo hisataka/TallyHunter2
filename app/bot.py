@@ -10,7 +10,7 @@ from .extreme.views import ExtremeTrialView
 from .hunt.commands import register as register_hunt
 from .hunt.views import HuntView, ResultView
 from .utils import get_data_field
-
+from .help.commands import register as register_help
 
 class HuntBot(commands.Bot):
     def __init__(self):
@@ -54,6 +54,7 @@ def create_bot():
     new_bot = HuntBot()
     register_hunt(new_bot)
     register_extreme(new_bot)
+    register_help(new_bot)
     return new_bot
 
 

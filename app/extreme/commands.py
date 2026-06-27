@@ -11,7 +11,7 @@ def register(bot):
     async def extreme_trial(
         interaction: discord.Interaction,
         team_name: str,
-        time_limit: int = 300,
+        time_limit: int = 180,
         is_host_mode: bool = False,
     ):
         view = ExtremeTrialView()
