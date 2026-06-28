@@ -114,9 +114,7 @@ class ArtifactView(discord.ui.View):
         super().__init__(timeout=None)
 
     async def _open_modal(self, interaction, idx):
-        _, host_id, is_host_mode = get_artifact_meta(
-            interaction.message
-        )
+        _, _, host_id, is_host_mode = get_artifact_meta(interaction.message)
 
         if not is_authorized(
             interaction,
