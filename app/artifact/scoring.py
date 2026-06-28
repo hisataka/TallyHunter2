@@ -1,7 +1,7 @@
-def calculate_artifact_score(cd, atk, cr):
+def calculate_artifact_score(cd, main_stat, cr):
     """
-    聖遺物スコア計算
+    聖遺物スコア
 
-    score = 会心ダメ + 攻撃% + 会心率*2
+    score = 会心ダメ + メインステータス + 会心率*2
     """
-    return cd + atk + cr * 2
+    return cd + main_stat + cr * 2

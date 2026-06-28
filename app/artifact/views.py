@@ -38,40 +38,40 @@ class ArtifactModal(discord.ui.Modal):
         self.message = message
         self.index = index
 
-        self.cd = discord.ui.TextInput(
-            label="会心ダメージ",
-            placeholder="例: 21.8",
-            required=True,
-        )
-
-        self.atk = discord.ui.TextInput(
-            label="攻撃力%",
-            placeholder="例: 11.1",
-            required=True,
-        )
-
         self.cr = discord.ui.TextInput(
             label="会心率",
             placeholder="例: 7.8",
             required=True,
         )
 
-        self.add_item(self.cd)
-        self.add_item(self.atk)
+        self.cd = discord.ui.TextInput(
+            label="会心ダメージ",
+            placeholder="例: 21.8",
+            required=True,
+        )
+
+        self.main_stat = discord.ui.TextInput(
+            label="メインステータス(%)",
+            placeholder="例: 46.6",
+            required=True,
+        )
+
         self.add_item(self.cr)
+        self.add_item(self.cd)
+        self.add_item(self.main_stat)
 
     async def on_submit(self, interaction: discord.Interaction):
         try:
-            cd = float(self.cd.value)
-            atk = float(self.atk.value)
             cr = float(self.cr.value)
+            cd = float(self.cd.value)
+            main_stat = float(self.main_stat.value)
         except ValueError:
             return await interaction.response.send_message(
                 NUMBER_REQUIRED_MESSAGE,
                 ephemeral=True,
             )
 
-        score = calculate_artifact_score(cd, atk, cr)
+        score = calculate_artifact_score(cd, main_stat, cr)
 
         scores, host_id, is_host_mode = get_artifact_meta(
             self.message
@@ -124,7 +124,7 @@ class ArtifactView(discord.ui.View):
 
     @discord.ui.button(
         label="花",
-        style=discord.ButtonStyle.secondary,
+        style=discord.ButtonStyle.danger,
         custom_id="artifact_0",
     )
     async def flower(self, interaction, button):
@@ -132,7 +132,7 @@ class ArtifactView(discord.ui.View):
 
     @discord.ui.button(
         label="羽",
-        style=discord.ButtonStyle.secondary,
+        style=discord.ButtonStyle.danger,
         custom_id="artifact_1",
     )
     async def feather(self, interaction, button):
