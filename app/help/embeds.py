@@ -1,60 +1,132 @@
 import discord
 
 
-def build_help_embed():
+def build_help_top_embed():
     embed = discord.Embed(
-        title="📖 TallyHunter Help",
-        description="利用可能なコマンド一覧",
+        title="📘 TallyHunter Help",
+        description="見たい機能を選択してください",
+        color=discord.Color.blurple(),
+    )
+    embed.set_footer(text="Help Top")
+    return embed
+
+
+def build_hunt_help_embed():
+    embed = discord.Embed(
+        title="🏹 狩猟大会 Help",
+        color=discord.Color.red(),
     )
 
     embed.add_field(
-        name="/start-hunt",
+        name="コマンド",
+        value="`/start-hunt`",
+        inline=False,
+    )
+
+    embed.add_field(
+        name="引数",
         value=(
-            "狩猟大会を開始します\n\n"
-            "引数:\n"
-            "• team_name (必須): チーム名\n"
-            "• minutes (任意): 制限時間（分、default=15）\n"
-            "• is_host_mode (任意): 主催者モード（ボタンを主催者のみが押下可能です。）\n\n"
-            "例:\n"
-            "`/start-hunt team_name:炎PT minutes:20`"
+            "• `team_name` (必須)\n"
+            "• `minutes` (default=15)\n"
+            "• `is_host_mode`"
         ),
         inline=False,
     )
 
     embed.add_field(
-        name="/extreme-trial",
+        name="使い方",
         value=(
-            "極限編成トライアルを開始します\n\n"
-            "引数:\n"
-            "• team_name (必須): チーム名\n"
-            "• time_limit (任意): 制限秒（default=180）\n"
-            "• is_host_mode (任意): 主催者モード（ボタンを主催者のみが押下可能です。）\n\n"
-            "例:\n"
-            "`/extreme-trial team_name:星4縛り time_limit:180`"
-        ),
-        inline=False,
-    )
-
-    embed.add_field(
-        name="/artifact-score",
-        value=(
-            "聖遺物スコアを計算します\n\n"
-            "計算式:\n"
-            "• 会心ダメージ + メインステータス + 会心率 × 2\n\n"
-            "引数:\n"
-            "• character_name (必須): キャラ名\n"
-            "• is_host_mode (任意): ホストのみ編集可能\n\n"
-            "使い方:\n"
             "1. コマンド実行\n"
-            "2. 花 / 羽 / 時計 / 杯 / 冠 ボタンを押す\n"
-            "3. 各聖遺物の値を入力\n"
-            "4. 合計スコアが表示される\n\n"
-            "※ メインステータスには元素ダメージ%、攻撃%、"
-            "チャージ効率%などを入力\n\n"
-            "例:\n"
-            "`/artifact-score character_name:フリーナ`"
+            "2. ボタンで討伐加算\n"
+            "3. 時間終了で自動集計"
         ),
         inline=False,
     )
 
+    embed.add_field(
+        name="例",
+        value="`/start-hunt team_name:炎PT minutes:20`",
+        inline=False,
+    )
+
+    embed.set_footer(text="Hunt Help")
+    return embed
+
+
+def build_extreme_help_embed():
+    embed = discord.Embed(
+        title="⚔️ 極限編成トライアル Help",
+        color=discord.Color.gold(),
+    )
+
+    embed.add_field(
+        name="コマンド",
+        value="`/extreme-trial`",
+        inline=False,
+    )
+
+    embed.add_field(
+        name="引数",
+        value=(
+            "• `team_name`\n"
+            "• `time_limit`\n"
+            "• `is_host_mode`"
+        ),
+        inline=False,
+    )
+
+    embed.add_field(
+        name="Tips",
+        value=(
+            "• 聖遺物スコアを入力\n"
+            "• キャラ凸・武器凸も加点対象"
+        ),
+        inline=False,
+    )
+
+    embed.set_footer(text="Extreme Help")
+    return embed
+
+
+def build_artifact_help_embed():
+    embed = discord.Embed(
+        title="⭐ 聖遺物スコア Help",
+        color=discord.Color.green(),
+    )
+
+    embed.add_field(
+        name="コマンド",
+        value="`/artifact-score`",
+        inline=False,
+    )
+
+    embed.add_field(
+        name="計算式",
+        value="`会心ダメ + メインステ + 会心率×2`",
+        inline=False,
+    )
+
+    embed.add_field(
+        name="ランク",
+        value=(
+            "SS 220+\n"
+            "S 200+\n"
+            "A 180+\n"
+            "B 160+\n"
+            "C 140+\n"
+            "D <140"
+        ),
+        inline=False,
+    )
+
+    embed.add_field(
+        name="Tips",
+        value=(
+            "• 花羽はメインステ入力あり\n"
+            "• 再度ボタン押下で再編集可能"
+        ),
+        inline=False,
+    )
+
+    embed.set_footer(text="Artifact Help")
     return embed
