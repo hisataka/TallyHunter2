@@ -35,4 +35,24 @@ def build_help_embed():
         inline=False,
     )
 
+    embed.add_field(
+        name="/artifact-score",
+        value=(
+            "聖遺物スコアを計算します\n\n"
+            "計算式:\n"
+            "• 会心ダメージ + 攻撃力% + 会心率 × 2\n\n"
+            "引数:\n"
+            "• character_name (必須): キャラ名\n"
+            "• is_host_mode (任意): ホストのみ編集可能\n\n"
+            "使い方:\n"
+            "1. コマンド実行\n"
+            "2. 花 / 羽 / 時計 / 杯 / 冠 ボタンを押す\n"
+            "3. 各聖遺物の値を入力\n"
+            "4. 合計スコアが表示される\n\n"
+            "例:\n"
+            "`/artifact-score character_name:フリーナ`"
+        ),
+        inline=False,
+    )
+
     return embed

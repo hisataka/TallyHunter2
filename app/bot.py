@@ -11,6 +11,8 @@ from .hunt.commands import register as register_hunt
 from .hunt.views import HuntView, ResultView
 from .utils import get_data_field
 from .help.commands import register as register_help
+from .artifact.commands import register as register_artifact
+from .artifact.views import ArtifactView
 
 class HuntBot(commands.Bot):
     def __init__(self):
@@ -20,6 +22,7 @@ class HuntBot(commands.Bot):
         self.add_view(HuntView())
         self.add_view(ResultView())  # デフォルト引数で初期化可能に
         self.add_view(ExtremeTrialView())
+        self.add_view(ArtifactView())
         self.auto_end.start()
         await self.tree.sync()
 
@@ -55,6 +58,7 @@ def create_bot():
     register_hunt(new_bot)
     register_extreme(new_bot)
     register_help(new_bot)
+    register_artifact(new_bot)
     return new_bot
 
 
