@@ -26,51 +26,51 @@ class HuntBot(commands.Bot):
         self.auto_end.start()
         await self.tree.sync()
 
-@tasks.loop(seconds=15)
-async def auto_end(self):
-    for guild in self.guilds:
-        for channel in guild.text_channels:
-            try:
-                after = discord.utils.utcnow() - datetime.timedelta(days=1)
+    @tasks.loop(seconds=15)
+    async def auto_end(self):
+        for guild in self.guilds:
+            for channel in guild.text_channels:
+                try:
+                    after = discord.utils.utcnow() - datetime.timedelta(days=1)
 
-                async for msg in channel.history(limit=200, after=after):
-                    # Bot投稿以外はスキップ
-                    if msg.author != self.user:
-                        continue
+                    async for msg in channel.history(limit=200, after=after):
+                        # Bot投稿以外はスキップ
+                        if msg.author != self.user:
+                            continue
 
-                    # embedなし
-                    if not msg.embeds:
-                        continue
+                        # embedなし
+                        if not msg.embeds:
+                            continue
 
-                    embed = msg.embeds[0]
+                        embed = msg.embeds[0]
 
-                    # _dataフィールドなし
-                    if "_data" not in [f.name for f in embed.fields]:
-                        continue
+                        # _dataフィールドなし
+                        if "_data" not in [f.name for f in embed.fields]:
+                            continue
 
-                    title = embed.title or ""
+                        title = embed.title or ""
 
-                    # 狩猟大会以外は無視
-                    if not title.startswith("🏆 狩猟大会中:"):
-                        continue
+                        # 狩猟大会以外は無視
+                        if not title.startswith("🏆 狩猟大会中:"):
+                            continue
 
-                    data = get_data_field(msg).split('|')
+                        data = get_data_field(msg).split('|')
 
-                    # Hunt format:
-                    # score|end_time|host_id|is_host_mode|counts
-                    if len(data) < 5:
-                        continue
+                        # Hunt format:
+                        # score|end_time|host_id|is_host_mode|counts
+                        if len(data) < 5:
+                            continue
 
-                    try:
-                        end_time = int(data[1])
-                    except ValueError:
-                        continue
+                        try:
+                            end_time = int(data[1])
+                        except ValueError:
+                            continue
 
-                    if time.time() > end_time:
-                        await HuntView().end_hunt_logic(msg)
+                        if time.time() > end_time:
+                            await HuntView().end_hunt_logic(msg)
 
-            except (discord.Forbidden, discord.HTTPException):
-                continue
+                except (discord.Forbidden, discord.HTTPException):
+                    continue
 
 def create_bot():
     new_bot = HuntBot()
