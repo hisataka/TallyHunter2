@@ -45,8 +45,8 @@ def build_hunt_help_embed():
     embed.add_field(
         name="オプション",
         value=(
-            "・制限時間を変更したい場合は【minutes】オプションを指定することで変更可能\n"
-            "・コマンド実行者以外が編集できないようにしたい場合は、【is_host_mode】オプションを指定することで変更可能"
+            "・【minutes】で制限時間（分）を変更可能\n"
+            "・【is_host_mode】で実行者以外の変更不可の制御可能"
         ),
         inline=False,
     )
@@ -88,8 +88,8 @@ def build_extreme_help_embed():
     embed.add_field(
         name="オプション",
         value=(
-            "・制限時間を変更したい場合は【time_limit】オプションを指定することで変更可能\n"
-            "・コマンド実行者以外が編集できないようにしたい場合は、【is_host_mode】オプションを指定することで変更可能"
+            "・【time_limit】で制限時間（秒）を変更可能\n"
+            "・【is_host_mode】で実行者以外の変更不可の制御可能"
         ),
         inline=False,
     )
@@ -140,7 +140,7 @@ def build_artifact_help_embed():
     embed.add_field(
         name="オプション",
         value=(
-            "・コマンド実行者以外が編集できないようにしたい場合は、【is_host_mode】オプションを指定することで変更可能"
+            "・【is_host_mode】で実行者以外の変更不可の制御可能"
         ),
         inline=False,
     )
