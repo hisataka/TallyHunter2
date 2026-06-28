@@ -13,7 +13,6 @@ from .utils import get_data_field
 from .help.commands import register as register_help
 from .artifact.commands import register as register_artifact
 from .artifact.views import ArtifactView
-from .help.views import HelpView, HelpBackView
 
 class HuntBot(commands.Bot):
     def __init__(self):
@@ -24,8 +23,6 @@ class HuntBot(commands.Bot):
         self.add_view(ResultView())  # デフォルト引数で初期化可能に
         self.add_view(ExtremeTrialView())
         self.add_view(ArtifactView())
-        self.add_view(HelpView())
-        self.add_view(HelpBackView())
         self.auto_end.start()
         await self.tree.sync()
 

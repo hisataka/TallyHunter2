@@ -7,7 +7,6 @@ def build_help_top_embed():
         description="見たい機能を選択してください",
         color=discord.Color.blurple(),
     )
-    embed.set_footer(text="Help Top")
     return embed
 
 
@@ -37,19 +36,12 @@ def build_hunt_help_embed():
         name="使い方",
         value=(
             "1. コマンド実行\n"
-            "2. ボタンで討伐加算\n"
-            "3. 時間終了で自動集計"
+            "2. ボタンで討伐数を加算\n"
+            "3. 制限時間終了で自動集計"
         ),
         inline=False,
     )
 
-    embed.add_field(
-        name="例",
-        value="`/start-hunt team_name:炎PT minutes:20`",
-        inline=False,
-    )
-
-    embed.set_footer(text="Hunt Help")
     return embed
 
 
@@ -76,15 +68,14 @@ def build_extreme_help_embed():
     )
 
     embed.add_field(
-        name="Tips",
+        name="説明",
         value=(
-            "• 聖遺物スコアを入力\n"
-            "• キャラ凸・武器凸も加点対象"
+            "聖遺物・キャラ凸・武器凸・討伐タイムから\n"
+            "極限スコアを算出します"
         ),
         inline=False,
     )
 
-    embed.set_footer(text="Extreme Help")
     return embed
 
 
@@ -102,31 +93,31 @@ def build_artifact_help_embed():
 
     embed.add_field(
         name="計算式",
-        value="`会心ダメ + メインステ + 会心率×2`",
+        value="`会心ダメージ + メインステータス + 会心率 × 2`",
         inline=False,
     )
 
     embed.add_field(
         name="ランク",
         value=(
-            "SS 220+\n"
-            "S 200+\n"
-            "A 180+\n"
-            "B 160+\n"
-            "C 140+\n"
-            "D <140"
+            "SS: 220+\n"
+            "S : 200+\n"
+            "A : 180+\n"
+            "B : 160+\n"
+            "C : 140+\n"
+            "D : <140"
         ),
         inline=False,
     )
 
     embed.add_field(
-        name="Tips",
+        name="補足",
         value=(
-            "• 花羽はメインステ入力あり\n"
-            "• 再度ボタン押下で再編集可能"
+            "• 花 / 羽 は赤ボタン\n"
+            "• 時計 / 杯 は青ボタン\n"
+            "• 冠 は緑ボタン"
         ),
         inline=False,
     )
 
-    embed.set_footer(text="Artifact Help")
     return embed
