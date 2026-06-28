@@ -14,10 +14,16 @@ def register(bot):
         character_name: str,
         is_host_mode: bool = False,
     ):
+
+        score_str = "0,0,0,0,0"
+        raw_input_str = ";".join(["0,0,0"] * 5)
+
         data_str = (
-            "0,0,0,0,0"
-            f"|{interaction.user.id}"
-            f"|{int(is_host_mode)}"
+            score_str
+            + "|"
+            + raw_input_str
+            + f"|{interaction.user.id}"
+            + f"|{int(is_host_mode)}"
         )
 
         embed = build_artifact_embed(

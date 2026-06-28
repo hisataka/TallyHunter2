@@ -18,10 +18,11 @@ def get_artifact_meta(message):
     data = get_data_field(message).split("|")
 
     scores = data[0].split(",")
-    host_id = int(data[1])
-    is_host_mode = bool(int(data[2]))
+    raw_inputs = data[1].split(";")
+    host_id = int(data[2])
+    is_host_mode = bool(int(data[3]))
 
-    return scores, host_id, is_host_mode
+    return scores, raw_inputs, host_id, is_host_mode
 
 
 def _character_name_from_message(message):
@@ -38,21 +39,27 @@ class ArtifactModal(discord.ui.Modal):
         self.message = message
         self.index = index
 
+        _, raw_inputs, _, _ = get_artifact_meta(message)
+        cr, cd, main = raw_inputs[index].split(",")
+
         self.cr = discord.ui.TextInput(
             label="会心率",
             placeholder="例: 7.8",
+            default="" if cr == "0" else cr,
             required=True,
         )
 
         self.cd = discord.ui.TextInput(
             label="会心ダメージ",
             placeholder="例: 21.8",
+            default="" if cd == "0" else cd,
             required=True,
         )
 
         self.main_stat = discord.ui.TextInput(
             label="メインステータス(%)",
             placeholder="例: 46.6",
+            default="" if main == "0" else main,
             required=True,
         )
 
@@ -73,14 +80,17 @@ class ArtifactModal(discord.ui.Modal):
 
         score = calculate_artifact_score(cd, main_stat, cr)
 
-        scores, host_id, is_host_mode = get_artifact_meta(
+        scores, raw_inputs, host_id, is_host_mode = get_artifact_meta(
             self.message
         )
 
         scores[self.index] = str(score)
+        raw_inputs[self.index] = f"{cr:.1f},{cd:.1f},{main_stat:.1f}"
 
         new_data = (
             ",".join(scores)
+            + "|"
+            + ";".join(raw_inputs)
             + f"|{host_id}|{int(is_host_mode)}"
         )
 
