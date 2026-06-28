@@ -27,7 +27,7 @@ def build_hunt_help_embed():
         value=(
             "• `team_name` (必須)\n"
             "• `minutes` (default=15)\n"
-            "• `is_host_mode`"
+            "• `is_host_mode` (default=False)"
         ),
         inline=False,
     )
@@ -38,6 +38,15 @@ def build_hunt_help_embed():
             "1. コマンド実行\n"
             "2. ボタンで討伐数を加算\n"
             "3. 制限時間終了で自動集計"
+        ),
+        inline=False,
+    )
+
+    embed.add_field(
+        name="オプション",
+        value=(
+            "・制限時間を変更したい場合は【minutes】オプションを指定することで変更可能\n"
+            "・コマンド実行者以外が編集できないようにしたい場合は、【is_host_mode】オプションを指定することで変更可能"
         ),
         inline=False,
     )
@@ -60,9 +69,9 @@ def build_extreme_help_embed():
     embed.add_field(
         name="引数",
         value=(
-            "• `team_name`\n"
-            "• `time_limit`\n"
-            "• `is_host_mode`"
+            "• `team_name` (必須)\n"
+            "• `time_limit` (default=180)\n"
+            "• `is_host_mode` (default=False)"
         ),
         inline=False,
     )
@@ -72,6 +81,15 @@ def build_extreme_help_embed():
         value=(
             "聖遺物・キャラ凸・武器凸・討伐タイムから\n"
             "極限スコアを算出します"
+        ),
+        inline=False,
+    )
+    
+    embed.add_field(
+        name="オプション",
+        value=(
+            "・制限時間を変更したい場合は【time_limit】オプションを指定することで変更可能\n"
+            "・コマンド実行者以外が編集できないようにしたい場合は、【is_host_mode】オプションを指定することで変更可能"
         ),
         inline=False,
     )
@@ -88,6 +106,15 @@ def build_artifact_help_embed():
     embed.add_field(
         name="コマンド",
         value="`/artifact-score`",
+        inline=False,
+    )
+
+    embed.add_field(
+        name="引数",
+        value=(
+            "• `character_name` (必須)\n"
+            "• `is_host_mode` (default=False)"
+        ),
         inline=False,
     )
 
@@ -111,11 +138,9 @@ def build_artifact_help_embed():
     )
 
     embed.add_field(
-        name="補足",
+        name="オプション",
         value=(
-            "• 花 / 羽 は赤ボタン\n"
-            "• 時計 / 杯 は青ボタン\n"
-            "• 冠 は緑ボタン"
+            "・コマンド実行者以外が編集できないようにしたい場合は、【is_host_mode】オプションを指定することで変更可能"
         ),
         inline=False,
     )
